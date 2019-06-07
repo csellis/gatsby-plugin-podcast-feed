@@ -1,0 +1,22 @@
+{
+  "name": "gatsby-plugin-podcast-feed",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "rss",
+    "podcast"
+  ],
+  "version": "0.1.0",
+  "description": "Gatsby Plugin for podcast feeds.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Ellis",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^8.0.1",
+    "lodash": "^4.17.11",
+    "rss": "^1.2.2"
+  }
+}
