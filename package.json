@@ -1,8 +1,6 @@
 {
   "name": "gatsby-plugin-podcast-feed",
   "keywords": [
-    "gatsby",
-    "gatsby-plugin",
     "rss",
     "podcast"
   ],
