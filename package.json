@@ -2,7 +2,9 @@
   "name": "gatsby-plugin-podcast-feed",
   "keywords": [
     "rss",
-    "podcast"
+    "podcast",
+    "gatsby",
+    "gatsby-plugin"
   ],
   "version": "0.1.0",
   "description": "Gatsby Plugin for podcast feeds.",
