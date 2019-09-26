@@ -34,7 +34,7 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
     `)
   );
 
-  const { feedOptions } = pluginOptions || {};
+  const { feedOptions, isContentLocal } = pluginOptions || {};
 
   const episodes = result.data.allMarkdownRemark.edges;
 
@@ -42,7 +42,20 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
 
   episodes.forEach(edge => {
     const { html, excerpt, id } = edge.node;
-    const { title, number, date, url, categories } = edge.node.frontmatter;
+    const { title, number, date, categories } = edge.node.frontmatter;
+    let url = '';
+
+    if (isContentLocal) {
+      if (!feedOptions.site_url) {
+        throw new Error(
+          'site_url must be defined on feedOptions when content is local'
+        );
+      }
+
+      url = `${feedOptions.site_url}/${edge.node.frontmatter.url}`;
+    } else {
+      url = edge.node.frontmatter.url;
+    }
 
     feed.item({
       guid: id,
