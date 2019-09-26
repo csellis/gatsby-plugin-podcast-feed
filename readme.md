@@ -88,3 +88,29 @@ This plugin tries to follow the naming conventions defined in the RSS [package](
 
 
 It generates an `xml` file in your public folder on build. To see the results please `gatsby build && gatsby serve`.
+
+### How to host mp3s locally
+
+To host mp3s locally, drop them in the `./static` folder of your site and reference their local path in the url frontmatter like so:
+
+```
+url: local/path/to/files.mp3
+```
+
+And enable that option in your `gatsby-node.js` file:
+
+```
+module.exports = {
+    plugins: [
+        {
+            resolve: `gatsby-plugin-podcast-feed`,
+            options: {
+                feedOptions,
+                isContentLocal: true
+            },
+        }
+    ]
+}
+```
+
+For this to work correctly, you also have to have the `site_url` property specified in your `feedOptions`.
