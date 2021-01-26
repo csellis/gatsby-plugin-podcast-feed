@@ -26,6 +26,10 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
                 url
                 number
                 date
+                enclosure {
+                  url
+                  type
+                }
               }
             }
           }
@@ -42,7 +46,7 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
 
   episodes.forEach(edge => {
     const { html, excerpt, id } = edge.node;
-    const { title, number, date, url, categories } = edge.node.frontmatter;
+    const { title, number, date, url, categories, enclosure } = edge.node.frontmatter;
 
     feed.item({
       guid: id,
@@ -52,6 +56,7 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
       categories,
       author: feedOptions.managingEditor,
       date,
+      enclosure,
       custom_elements: [
         { 'content:encoded': html },
         { pubDate: date },
@@ -75,7 +80,7 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
   const publicPath = `./public`;
   const outputPath = path.join(publicPath, '/rss.xml');
   const outputDir = path.dirname(outputPath);
-  if (!(await fs.exists(outputDir))) {
+  if (!(await fs.stat(outputDir))) {
     await fs.mkdirp(outputDir);
   }
   await fs.writeFile(outputPath, feed.xml());
